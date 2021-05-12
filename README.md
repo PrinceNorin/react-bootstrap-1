@@ -1,4 +1,47 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+## Overview
+Bootstrap create-react-app and integrate with the following
+
+- redux-toolkit
+- redux, react-redux for state management
+- react-router client side routing
+- SASS/SCSS, bootstrap css & styling
+- i18next, react-i18next internationalization
+- redux-saga async/api action handling
+- craco customize CRA webpack config without eject
+- add custom helper, component & hooks
+- establishing project structure
+
+## Project Structure
+
+### app
+A central place to combine various reducer, actions or sagas live here
+
+### features
+To group related functionality usually component, action, state and style are bundle together here
+
+### components
+Pure UI component with or without state of it's own live here
+
+### hooks
+Custom hooks go here
+
+### layouts
+Application page layout
+
+### locales
+For translation
+
+### pages
+Page components go here
+
+### routes
+Route declaration and function wrapper
+
+### styles
+Global and external style can be imported from here
+
+### utils
+A collection of utility functions that needed to share across project
 
 ## Available Scripts
 
