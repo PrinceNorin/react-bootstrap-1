@@ -1,35 +1,15 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { GlobalLayout } from '~/layouts';
-import NotFound from '~/pages/NotFound';
-import routes from '~/routes';
+
+import Routes from '~/routes';
+import { GlobalContext, useGlobal } from '~/hooks/global';
 
 function App() {
-  const renderRoutes = () => {
-    return routes.map(({ layout, component, ...props }) => {
-      const Layout = layout ? layout : GlobalLayout;
-
-      return (
-        <Route
-          {...props}
-          key={props.path}
-          render={(route) => (
-            <Layout Component={component} route={route} />
-          )}
-        />
-      )
-    })
-  }
+  const global = useGlobal();
 
   return (
-    <BrowserRouter>
-      <Switch>
-        {renderRoutes()}
-        <Route render={(route) => (
-          <GlobalLayout Component={NotFound} route={route} />
-        )} />
-      </Switch>
-    </BrowserRouter>
+    <GlobalContext.Provider value={global}>
+      <Routes />
+    </GlobalContext.Provider>
   );
 }
 

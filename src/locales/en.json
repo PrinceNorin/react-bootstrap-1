@@ -1,0 +1,8 @@
+{
+  "password": "Password",
+  "sign_in": "Sign In",
+  "email": "Email",
+  "hello": {
+    "world": "Hello, World!"
+  }
+}

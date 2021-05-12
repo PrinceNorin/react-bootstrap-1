@@ -1,20 +1,33 @@
-import { AppLayout, GlobalLayout } from '~/layouts';
-import SignIn from '~/pages/SignIn';
-import Home from '~/pages/Home';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { GlobalLayout } from '~/layouts';
+import NotFound from '~/pages/NotFound';
+import routes from './routes';
 
-export const routes = [
-  {
-    component: Home,
-    exact: true,
-    path: '/',
-    layout: AppLayout
-  },
-  {
-    component: SignIn,
-    exact: true,
-    path: '/login',
-    layout: GlobalLayout
+export default function Routes() {
+  const renderRoutes = () => {
+    return routes.map(({ layout, component, ...props }) => {
+      const Layout = layout ? layout : GlobalLayout;
+
+      return (
+        <Route
+          {...props}
+          key={props.path}
+          render={(route) => (
+            <Layout Component={component} route={route} />
+          )}
+        />
+      )
+    })
   }
-];
 
-export default routes;
+  return (
+    <BrowserRouter>
+      <Switch>
+        {renderRoutes()}
+        <Route render={(route) => (
+          <GlobalLayout Component={NotFound} route={route} />
+        )} />
+      </Switch>
+    </BrowserRouter>
+  )
+}
