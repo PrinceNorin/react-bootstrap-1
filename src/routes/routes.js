@@ -7,6 +7,7 @@ export const routes = [
     component: Home,
     exact: true,
     path: '/',
+    isPrivate: true,
     layout: AppLayout
   },
   {

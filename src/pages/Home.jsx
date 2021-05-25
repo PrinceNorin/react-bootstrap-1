@@ -1,11 +1,9 @@
-import React from 'react';
-import { Counter } from '~/features/counter/Counter';
+import BoardDetail from '~/features/board/BoardDetail';
 
 export default function Home() {
   return (
     <div>
-      <h1 className="text-center">Counter App</h1>
-      <Counter />
+      <BoardDetail />
     </div>
   );
 }

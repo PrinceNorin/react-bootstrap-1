@@ -12,7 +12,14 @@ export const createSagaAction = (typePrefix, payloadCreator) => {
         const result = yield call(payloadCreator, payload);
         yield put(fulfilled(result));
       } catch (err) {
-        yield put(rejected(err));
+        const { response } = err;
+
+        // http request error
+        if (response) {
+          yield put(rejected(response.data));
+        } else {
+          yield put(rejected({ message: err.message }));
+        }
       }
     });
   }

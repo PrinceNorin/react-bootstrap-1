@@ -6,13 +6,7 @@ export function AppLayout({ Component, route }) {
   return (
     <div>
       <Navigation />
-      <div className="container">
-        <div className="row">
-          <div className="col-12">
-            <Component route={route} />
-          </div>
-        </div>
-      </div>
+      <Component route={route} />
     </div>
   );
 }

@@ -1,0 +1,12 @@
+.boardDetail {
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+  height: calc(100vh - 55px);
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  background-color: #fff;
+  padding: 0 15px;
+  position: relative;
+}
