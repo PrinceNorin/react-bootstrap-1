@@ -2,9 +2,16 @@ import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { fetchBoard, selectBoard, updateList as updateListAction, moveList as moveListAction } from '~/features/board/boardSlice';
 import { selectSession } from '~/features/session';
 import { DraggableList, ListDragLayer } from '~/components/List';
+import {
+  fetchBoard,
+  selectBoard,
+  moveList as moveListAction,
+  createTask as createTaskAction,
+  updateList as updateListAction,
+} from '~/features/board/boardSlice';
+
 import styles from './BoardDetail.module.css';
 
 export default function BoardDetail() {
@@ -15,6 +22,12 @@ export default function BoardDetail() {
   useEffect(() => {
     dispatch(fetchBoard(token));
   }, [dispatch, token]);
+
+  const createTask = (task) => {
+    dispatch(createTaskAction({
+      task, token
+    }));
+  }
 
   const moveList = useCallback((dragIndex, hoverIndex, isDrop) => {
     if (isDrop) {
@@ -38,6 +51,7 @@ export default function BoardDetail() {
         index={index}
         key={list.id}
         moveList={moveList}
+        onTaskCreated={createTask}
       />
     )
   }

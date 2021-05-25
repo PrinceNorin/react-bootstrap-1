@@ -15,3 +15,11 @@ export const updateList = (id, payload, token) => {
     }
   });
 }
+
+export const createTask = (task, token) => {
+  return axios.post('http://localhost:3001/tasks', task, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
+}

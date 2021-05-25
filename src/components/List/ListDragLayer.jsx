@@ -20,7 +20,7 @@ const getItemStyles = (initialOffset, currentOffset) => {
   }
 
   const { x, y } = currentOffset;
-  const transform = `translate(${x}px, ${y - 60}px)`;
+  const transform = `translate(${x}px, ${y - 55}px)`;
 
   return {
     transform,

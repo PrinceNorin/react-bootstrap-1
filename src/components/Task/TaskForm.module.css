@@ -1,0 +1,48 @@
+.taskForm {
+  margin-top: 5px;
+  margin-bottom: 0;
+  padding: 0 15px;
+}
+
+.taskForm textarea {
+  min-height: 50px;
+  resize: none;
+  border: none;
+  width: 100%;
+  box-shadow: 0 1px 1px rgb(155 155 155 / 20%);
+  border-top: 1px solid #efefef;
+  border-radius: 8px;
+  color: #4a4a4a;
+  font-size: 12px;
+}
+
+.taskForm textarea:focus {
+  border-color: #efefef;
+  box-shadow: 0 1px 1px rgb(155 155 155 / 20%);
+}
+
+.buttonGroup {
+  display: flex;
+  margin-top: 8px;
+  justify-content: flex-end;
+}
+
+.buttonGroup > button {
+  padding: 4px 14px;
+  font-size: 11px;
+  width: 80px;
+  line-height: 18px;
+  border-radius: 8px;
+  transition: all .3s ease;
+  font-weight: 600;
+}
+
+.buttonGroup button:first-child {
+  background-color: #edf6ff;
+  color: #4dabff;
+}
+
+.buttonGroup button:last-child {
+  background-color: #4dabff;
+  color: #fff;
+}

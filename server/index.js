@@ -62,6 +62,7 @@ fastify.decorate('authenticate', async (req, _reply) => {
 
 fastify.register(require('./board'));
 fastify.register(require('./list'));
+fastify.register(require('./task'));
 
 const start = async () => {
   try {

@@ -1,2 +1,9 @@
 @import "variables";
 @import "bootstrap/scss/bootstrap";
+
+input, textarea, button, .btn, .form-control {
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}

@@ -9,12 +9,12 @@
   border-top: solid 10px #4DABFF;
 }
 
-.listHead {
+.listDraggable {
   padding: 5px 10px 10px;
   cursor: -webkit-grab;
 }
 
-.listHead button {
+.listHead > button {
   font-size: 13px;
   margin-top: 5px;
   padding: 7px 38px;
@@ -38,8 +38,4 @@
   font-size: 14px;
   color: #56595d;
   margin-bottom: 0;
-}
-
-.listBody {
-  
 }

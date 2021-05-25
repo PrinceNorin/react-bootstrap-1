@@ -9,7 +9,7 @@ const getStyles = (isDragging) => ({
   height: isDragging ? 0 : ''
 });
 
-const DraggableList = memo(function DraggableList({ list, index, moveList }) {
+const DraggableList = memo(function DraggableList({ list, index, moveList, onTaskCreated }) {
   const dropRef = useRef(null);
   const dragRef = useRef(null);
 
@@ -73,7 +73,7 @@ const DraggableList = memo(function DraggableList({ list, index, moveList }) {
 
   return (
     <div ref={dropRef} style={getStyles(isDragging)} data-handler-id={handlerId}>
-      <List list={list} dragRef={dragRef} />
+      <List list={list} dragRef={dragRef} onTaskCreated={onTaskCreated} />
     </div>
   )
 });
