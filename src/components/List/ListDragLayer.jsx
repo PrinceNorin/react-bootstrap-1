@@ -1,4 +1,4 @@
-import List from './List';
+import ListDragPreview from './ListDragPreview';
 import { ItemTypes } from "~/features/board/ItemTypes";
 import { useDragLayer } from 'react-dnd';
 
@@ -20,7 +20,7 @@ const getItemStyles = (initialOffset, currentOffset) => {
   }
 
   const { x, y } = currentOffset;
-  const transform = `translate(${x}px, ${y - 55}px)`;
+  const transform = `translate(${x}px, ${y}px)`;
 
   return {
     transform,
@@ -41,7 +41,7 @@ export default function ListDragLayer({ list }) {
     <div style={styles}>
       <div style={getItemStyles(initialOffset, currentOffset)}>
         {itemType === ItemTypes.CARD ? (
-          <List list={item.list} />
+          <ListDragPreview list={item.list} />
         ) : null}
       </div>
     </div>
