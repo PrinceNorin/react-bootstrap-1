@@ -7,7 +7,7 @@ export default function Auth({ layout, component, route, isPrivate }) {
   const session = useSelector(selectSession);
   const Layout = layout ? layout : GlobalLayout;
 
-  if (!session.user && isPrivate) {
+  if (session.status !== 'loading' && !session.user && isPrivate) {
     return (
       <Redirect to="/login" />
     );

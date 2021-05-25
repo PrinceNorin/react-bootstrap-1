@@ -1,5 +1,6 @@
 import { all } from "@redux-saga/core/effects";
 import { createSlice } from "@reduxjs/toolkit";
+import { createSelector } from '@reduxjs/toolkit'
 import { createSagaAction } from "~/utils";
 import {
   fetchBoard as fetchBoardAPI,
@@ -107,6 +108,26 @@ export const boardSlice = createSlice({
 export const { moveList } = boardSlice.actions;
 
 export const selectBoard = (state) => state.board;
+
+export const selectTask = (taskId) => createSelector(
+  selectBoard,
+  ({ board }) => {
+    if (!board) {
+      return null;
+    }
+  
+    for (let i = 0; i< board.lists.length; i++) {
+      const tasks = board.lists[i].tasks || [];
+      const task = tasks.find(task => task.id === taskId);
+  
+      if (task) {
+        return task;
+      }
+    }
+  
+    return null;
+  }
+);
 
 export function *saga() {
   yield all([

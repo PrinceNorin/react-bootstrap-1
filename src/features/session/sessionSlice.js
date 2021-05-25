@@ -6,7 +6,7 @@ import storage from '~/utils/storage';
 const initialState = {
   user: null,
   error: '',
-  status: 'idle',
+  status: 'loading',
   jwt: null
 };
 
@@ -27,6 +27,7 @@ export const sessionSlice = createSlice({
     setSession: (state, action) => {
       const { payload } = action;
 
+      state.status = 'idle';
       state.jwt = payload.jwt;
       state.user = payload.user;
     }

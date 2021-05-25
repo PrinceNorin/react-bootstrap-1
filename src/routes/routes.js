@@ -4,17 +4,16 @@ import Home from '~/pages/Home';
 
 export const routes = [
   {
-    component: Home,
-    exact: true,
-    path: '/',
-    isPrivate: true,
-    layout: AppLayout
-  },
-  {
     component: SignIn,
     exact: true,
     path: '/login',
     layout: GlobalLayout
+  },
+  {
+    component: Home,
+    path: '/',
+    isPrivate: true,
+    layout: AppLayout
   }
 ];
 
