@@ -60,6 +60,33 @@ fastify.decorate('authenticate', async (req, _reply) => {
   }
 });
 
+fastify.decorate('getList', (id) => {
+  const { lists } = fastify.internalData.board;
+  const index = lists.findIndex(list => list.id === id);
+  if (index !== -1) {
+    return {
+      index,
+      list: lists[index]
+    };
+  }
+});
+
+fastify.decorate('getTask', (id) => {
+  const { board } = fastify.internalData;
+  for (let i = 0; i < board.lists.length; i++) {
+    const tasks = board.lists[i].tasks || [];
+    const taskIndex = tasks.findIndex(task => task.id === id);
+
+    if (taskIndex !== -1) {
+      return {
+        listId: board.lists[i].id,
+        index: taskIndex,
+        task: tasks[taskIndex]
+      }
+    }
+  }
+});
+
 fastify.register(require('./board'));
 fastify.register(require('./list'));
 fastify.register(require('./task'));

@@ -1,25 +1,33 @@
 import axios from 'axios';
+import storage from '~/utils/storage';
 
-export const fetchBoard = (token) => {
-  return axios.get('http://localhost:3001/board', {
-    headers: {
-      'Authorization': `Bearer ${token}`
-    }
+const request = () => {
+  const { jwt } = storage.getSession();
+
+  let headers = null;
+  if (jwt && jwt.token) {
+    headers = {
+      'Authorization': `Bearer ${jwt.token}`
+    };
+  }
+
+  return axios.create({
+    headers
   });
 }
 
-export const updateList = (id, payload, token) => {
-  return axios.patch(`http://localhost:3001/list/${id}`, payload, {
-    headers: {
-      'Authorization': `Bearer ${token}`
-    }
-  });
+export const fetchBoard = () => {
+  return request().get('http://localhost:3001/board');
 }
 
-export const createTask = (task, token) => {
-  return axios.post('http://localhost:3001/tasks', task, {
-    headers: {
-      'Authorization': `Bearer ${token}`
-    }
-  });
+export const updateList = (id, payload) => {
+  return request().patch(`http://localhost:3001/list/${id}`, payload);
+}
+
+export const createTask = (task) => {
+  return request().post('http://localhost:3001/tasks', task);
+}
+
+export const updateTask = (id, task) => {
+  return request().patch(`http://localhost:3001/tasks/${id}`, task);
 }

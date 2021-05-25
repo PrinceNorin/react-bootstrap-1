@@ -4,7 +4,8 @@ import { createSagaAction } from "~/utils";
 import {
   fetchBoard as fetchBoardAPI,
   updateList as updateListAPI,
-  createTask as createTaskAPI
+  createTask as createTaskAPI,
+  updateTask as updateTaskAPI
 } from './boardAPI';
 
 const initialState = {
@@ -14,27 +15,34 @@ const initialState = {
 
 export const fetchBoard = createSagaAction(
   'board/fetchBoard',
-  async (token) => {
-    const { data } = await fetchBoardAPI(token);
+  async () => {
+    const { data } = await fetchBoardAPI();
     return data;
   }
 );
 
 export const updateList = createSagaAction(
-  'board/moveList',
+  'board/updateList',
   async (payload) => {
     await updateListAPI(payload.id, {
-      index: payload.newIndex
-    }, payload.token);
+      index: payload.index
+    });
     return payload;
   }
 )
 
 export const createTask = createSagaAction(
   'board/createTask',
-  async (payload) => {
-    const { task, token } = payload;
-    const { data } = await createTaskAPI(task, token);
+  async (task) => {
+    const { data } = await createTaskAPI(task);
+    return data;
+  }
+)
+
+export const updateTask = createSagaAction(
+  'board/updateTask',
+  async (task) => {
+    const { data } = await updateTaskAPI(task.id, task);
     return data;
   }
 )
@@ -69,18 +77,10 @@ export const boardSlice = createSlice({
         };
       })
       .addCase(updateList.fulfilled, (state, action) => {
-        const { payload: { newIndex } } = action;
-        const newLists = [...state.board.lists];
+        const { payload: { index } } = action;
+        const lists = state.board.lists;
 
-        newLists[newIndex].index = newIndex;
-        state.board.lists = newLists
-
-        // const { dragIndex, hoverIndex } = payload;
-        // const dragList = state.board.lists[dragIndex];
-        // const hoverList = state.board.lists[hoverIndex];
-
-        // state.board.lists[hoverIndex] = dragList;
-        // state.board.lists[dragIndex] = hoverList;
+        lists[index].index = index;
       })
       .addCase(createTask.fulfilled, (state, action) => {
         const lists = state.board.lists;
@@ -94,6 +94,13 @@ export const boardSlice = createSlice({
           });
         }
       })
+      .addCase(updateTask.fulfilled, (state, action) => {
+        const { id, title, listId } = action.payload;
+        const list = state.board.lists.find(list => list.id === listId);
+        const task = list.tasks.find(task => task.id === id);
+
+        task.title = title;
+      })
   }
 });
 
@@ -105,7 +112,8 @@ export function *saga() {
   yield all([
     fetchBoard.saga(),
     updateList.saga(),
-    createTask.saga()
+    createTask.saga(),
+    updateTask.saga(),
   ]);
 }
 

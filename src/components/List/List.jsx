@@ -3,7 +3,7 @@ import TaskList from '~/components/Task/TaskList';
 import TaskForm from '~/components/Task/TaskForm';
 import styles from './List.module.css';
 
-const List = memo(function List({ list, dragRef, onTaskCreated }) {
+const List = memo(function List({ list, dragRef, onTaskCreated, onTaskClick }) {
   const [creating, setCreating] = useState(false);
 
   const showCreateTaskForm = (event) => {
@@ -38,7 +38,11 @@ const List = memo(function List({ list, dragRef, onTaskCreated }) {
           </button>
         )}
       </div>
-      <TaskList tasks={list.tasks} />
+      <TaskList
+        list={list}
+        tasks={list.tasks}
+        onTaskClick={onTaskClick}
+      />
     </div>
   )
 });

@@ -1,21 +1,22 @@
-import styles from './TaskList.module.css';
+import Task from './Task';
 
-export function Task({ task }) {
-  return (
-    <div className={styles.task}>
-      <div className={styles.taskContent}>
-        <span>#{task.id}</span>
-        <h5>{task.title}</h5>
-        <div className={styles.taskTime}></div>
-      </div>
-    </div>
-  );
+const styles = {
+  overflowX: 'hidden',
+  height: '100%',
+  padding: '2px 10px 0 10px'
 }
 
-export default function TaskList({ tasks }) {
+export default function TaskList({ list, tasks, onTaskClick }) {
   return (
-    <div className={styles.taskList}>
-      {tasks.map(task => <Task task={task} key={task.id} />)}
+    <div style={styles}>
+      {tasks.map(task => (
+        <Task
+          list={list}
+          key={task.id}
+          task={task}
+          onClick={onTaskClick}
+        />
+      ))}
     </div>
   )
 }
